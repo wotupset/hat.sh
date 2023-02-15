@@ -1,0 +1,114 @@
+<html>
+  <head>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.slim.js"
+  integrity="sha256-DKU1CmJ8kBuEwumaLuh9Tl/6ZB6jzGOBV/5YpNE2BWc="
+  crossorigin="anonymous"></script>
+    
+    <style>
+#aaa {
+  background-image:url('https://user-images.githubusercontent.com/4385327/218495456-af198cf0-8e5f-4c19-8bbd-1275e4ebde1b.png');
+  background-position: left 0px;
+  height:250px;
+  width:250px;
+  border:10px solid red; 
+}
+
+/*
+https://fes.priconne-redive.jp/assets/images/common/top/news_chara4.png
+*/
+    </style>
+    <script>
+$(document).ready(function() {
+  console.log( 'document ready' );//不會執行這段
+  poi();
+});
+
+function poi(){
+  $('#aaa').html('');
+  $.poi230208=0;
+  //動畫1();
+  var time_o = ''+Date.now();
+  //console.log( time_o );//不會執行這段 
+  window.poi2023={};
+  window.poi2023.time_o='1676300115762';
+  動畫2([0,0]);
+}
+function 動畫2(in1){
+  //console.log( '動畫2' );
+  var [cc,step]=in1;
+  var FFF='';
+  var time_i = ''+Date.now();
+  //console.log( time_i );
+
+  //
+  FFF=time_i- window.poi2023.time_o ;
+  //console.log( FFF );
+  FFF=Math.floor( FFF/ 100 );//fps=25
+  var step_i=FFF;
+  //console.log( step_i );
+  //console.log( window.poi2023 );
+  
+  
+  cc=cc+1;
+  FFF=cc*250*-1;
+  
+  //$("#aaa").css('background-position','left '+FFF+'px');
+  //FFF=document.querySelector('#aaa');
+  //console.log( FFF );//不會執行這段
+  //FFF.style = "background-position:left 750px";
+
+  
+  FFF=[cc,step];
+  //console.log( FFF );
+  if(step_i > step){
+    FFF=[cc,step_i];
+    console.log( FFF );
+    console.log( 'yy' );
+    //console.log( FFF );
+    window.poi2023.函式=requestAnimationFrame(function(){
+      
+      var aa=document.querySelector('#aaa');
+      //console.log( aa );
+      var bb=step_i*250*(-1);
+      bb=bb % 4750; //圖片高度
+      console.log( bb );
+      aa.style = "background-position:left "+bb+"px";
+
+      動畫2(FFF);
+    });
+    //return;
+  }else{
+    //console.log( 'nn' );
+    //cancelAnimationFrame( window.poi2023.函式 );
+    window.poi2023.函式=requestAnimationFrame(function(){
+      動畫2(FFF);
+    });
+
+  }
+  
+}
+
+function 動畫1(){
+  var FFF='';
+  $("#bbb").fadeOut( 40 ).fadeIn( 0 ,function(){ //animate
+    console.log( '動畫' );//不會執行這段
+    FFF=$.poi230208;
+    FFF=FFF+1;
+    $.poi230208=FFF;
+    FFF=FFF*250*-1;
+    //$("#bbb").html( FFF );
+    $("#aaa").css('background-position','left '+FFF+'px');
+    動畫1();
+  });  
+
+}
+
+
+    </script>
+  </head>
+  <body>
+    <div id="aaa">aaa</div>
+    <div id="bbb">bbb</div>
+  </body>
+</html>
